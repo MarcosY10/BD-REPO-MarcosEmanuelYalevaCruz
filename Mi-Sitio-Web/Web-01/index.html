@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de SQL Server & Bases de Datos</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script defer src="./js/script.js"></script>
+</head>
+<body>
+
+    <!-- NAVBAR PRINCIPAL -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SQL<span class="highlight">Dev</span>Guide</span>
+            </div>
+            <nav class="nav-links">
+                <button class="theme-btn" id="themeToggle" aria-label="Cambiar tema">
+                    <span id="themeIcon">☀️</span>
+                    <span id="themeText">Modo Claro</span>
+                </button>
+                <button class="nav-btn" onclick="toggleMobileSidebar()" id="btn-menu-toggle">☰ Menú de Temas</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="main-layout">
+        
+        <!-- SIDEBAR IZQUIERDO CON TEMAS Y SCROLL DESPLEGABLE -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>📚 Temas de Estudio</h3>
+                <p class="sidebar-subtitle">Desliza para explorar todos los temas</p>
+            </div>
+
+            <!-- CONTENEDOR DE TEMAS LIMITADO A 6 VISIBLES -->
+            <ul class="topic-list">
+                <li>
+                    <button class="topic-btn active" data-topic="intro" onclick="selectTopic('intro')">
+                        <span class="topic-num">01</span>
+                        <span class="topic-title">Introducción a SQL</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="instalacion" onclick="selectTopic('instalacion')">
+                        <span class="topic-num">02</span>
+                        <span class="topic-title">Instalación en Linux</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="ddl" onclick="selectTopic('ddl')">
+                        <span class="topic-num">03</span>
+                        <span class="topic-title">Crear Base de Datos y Tablas</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="dml" onclick="selectTopic('dml')">
+                        <span class="topic-num">04</span>
+                        <span class="topic-title">Consultas Básicas (CRUD)</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="filtrado" onclick="selectTopic('filtrado')">
+                        <span class="topic-num">05</span>
+                        <span class="topic-title">Filtrado de Resultados</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="ordenamiento" onclick="selectTopic('ordenamiento')">
+                        <span class="topic-num">06</span>
+                        <span class="topic-title">Ordenamiento de Resultados</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="agregacion" onclick="selectTopic('agregacion')">
+                        <span class="topic-num">07</span>
+                        <span class="topic-title">Funciones de Agregación</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="agrupamiento" onclick="selectTopic('agrupamiento')">
+                        <span class="topic-num">08</span>
+                        <span class="topic-title">Agrupamiento de Resultados</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="relaciones" onclick="selectTopic('relaciones')">
+                        <span class="topic-num">09</span>
+                        <span class="topic-title">Claves y Relaciones</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="joins" onclick="selectTopic('joins')">
+                        <span class="topic-num">10</span>
+                        <span class="topic-title">Consultas entre Tablas (JOINs)</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="subconsultas" onclick="selectTopic('subconsultas')">
+                        <span class="topic-num">11</span>
+                        <span class="topic-title">Subconsultas</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="avanzadas" onclick="selectTopic('avanzadas')">
+                        <span class="topic-num">12</span>
+                        <span class="topic-title">Consultas Avanzadas</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="topic-btn" data-topic="node" onclick="selectTopic('node')">
+                        <span class="topic-num">13</span>
+                        <span class="topic-title">Conexión con Node.js</span>
+                    </button>
+                </li>
+            </ul>
+
+            <!-- SECCIÓN DE GIFS ALEATORIOS -->
+            <div class="sidebar-footer">
+                <div class="gif-box">
+                    <button class="gif-btn" id="randomGifBtn">GIF Aleatorio 🎲</button>
+                    <div class="gif-wrapper">
+                        <div class="gif-item"><div class="tenor-gif-embed" data-postid="17361495" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="6043271678546195943" data-share-method="host" data-aspect-ratio="0.675676" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="5264604870865972494" data-share-method="host" data-aspect-ratio="1.02326" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="10122031943064013786" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="17959378270241582062" data-share-method="host" data-aspect-ratio="0.801205" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="2302150679437844082" data-share-method="host" data-aspect-ratio="0.564257" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="8746293078017094853" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="6419031840032064525" data-share-method="host" data-aspect-ratio="0.987805" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="14037780559603300239" data-share-method="host" data-aspect-ratio="1.41026" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="167765138327423124" data-share-method="host" data-aspect-ratio="0.973451" data-width="100%"></div></div>
+                          <div class="gif-item"><div class="tenor-gif-embed" data-postid="23435782" data-share-method="host" data-aspect-ratio="2.35294" data-width="100%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ÁREA DE CONTENIDO DINÁMICO (DERECHA) -->
+        <main class="content-area">
+            
+            <div class="breadcrumb">
+                <span>Ubicación actual:</span>
+                <strong id="current-location">01. Introducción a SQL</strong>
+            </div>
+
+            <!-- TEMA 01: INTRODUCCIÓN -->
+            <section id="topic-intro" class="topic-content active">
+                <h1 class="main-title">Aprende SQL Server de Forma Sencilla</h1>
+                <p class="lead-text">
+                    Bienvenido a la guía interactiva paso a paso. Diseñada para comprender el mundo de las bases de datos relacionales sin complicaciones técnicas.
+                </p>
+
+                <div class="card-grid">
+                    <div class="info-card">
+                        <div class="card-icon">🗄️</div>
+                        <h3>¿Qué es una Base de Datos?</h3>
+                        <p>Es un almacén organizado de información digital. Piensa en ella como una hoja de datos veloz y segura donde puedes almacenar usuarios, registros o productos.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-icon">⚙️</div>
+                        <h3>¿Qué es SQL Server?</h3>
+                        <p>Es un sistema de gestión de bases de datos relacionales (RDBMS) desarrollado por Microsoft. Permite administrar grandes volúmenes de información de manera eficiente.</p>
+                    </div>
+                </div>
+
+                <div class="image-wrapper">
+                    <svg class="diagram-svg" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="40" width="140" height="100" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                        <text x="90" y="85" text-anchor="middle" fill="#0369a1" font-weight="bold" font-size="14">🌐 Usuario / Web</text>
+                        <text x="90" y="105" text-anchor="middle" fill="#0c4a6e" font-size="11">(React / HTML)</text>
+                        <path d="M 170 90 L 250 90" stroke="#0284c7" stroke-width="3"/>
+                        <rect x="260" y="40" width="140" height="100" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                        <text x="330" y="85" text-anchor="middle" fill="#15803d" font-weight="bold" font-size="14">⚡ Servidor Backend</text>
+                        <text x="330" y="105" text-anchor="middle" fill="#14532d" font-size="11">(Node.js / Express)</text>
+                        <path d="M 410 90 L 490 90" stroke="#16a34a" stroke-width="3"/>
+                        <rect x="500" y="40" width="80" height="100" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <text x="540" y="85" text-anchor="middle" fill="#b45309" font-weight="bold" font-size="14">🗄️ SQL</text>
+                        <text x="540" y="105" text-anchor="middle" fill="#78350f" font-size="11">Server</text>
+                    </svg>
+                </div>
+
+                <div class="action-footer">
+                    <div></div>
+                    <button class="btn-primary" onclick="selectTopic('instalacion')">Siguiente Tema: Instalación ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 02: INSTALACIÓN -->
+            <section id="topic-instalacion" class="topic-content">
+                <h2 class="section-title">Instalación de SQL Server en Linux (Ubuntu)</h2>
+                <p class="text-block">
+                    SQL Server puede ejecutarse en distribuciones Linux como Ubuntu 22.04 LTS. A continuación verás la secuencia de comandos requerida en la terminal.
+                </p>
+
+                <div class="info-card warning-card">
+                    <div class="card-icon">🐧</div>
+                    <div>
+                        <h4>Requisito Previo</h4>
+                        <p>Asegúrate de contar con al menos 2 GB de memoria RAM libre y permisos de superusuario (sudo) en el sistema.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">1. Importar repositorio público y claves</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Terminal Bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/22.04/mssql-server-2022.list)"</code></pre>
+                </div>
+
+                <h3 class="subsection-title">2. Instalar y configurar el paquete</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Terminal Bash</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>sudo apt-get update
+sudo apt-get install -y mssql-server
+sudo /opt/mssql/bin/mssql-conf setup</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('intro')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('ddl')">Siguiente Tema: Crear BD ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 03: DDL -->
+            <section id="topic-ddl" class="topic-content">
+                <h2 class="section-title">Creación de Bases de Datos y Tablas</h2>
+                <p class="text-block">
+                    El lenguaje DDL (Data Definition Language) permite estructurar los contenedores y esquemas donde residirán los datos.
+                </p>
+
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>1. Crear Base de Datos</h3>
+                        <p>Crea el contenedor principal con el comando <code>CREATE DATABASE</code>.</p>
+                        <div class="code-block">
+                            <pre><code>CREATE DATABASE SistemaUsuarios;
+GO
+USE SistemaUsuarios;
+GO</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>2. Crear Tabla con Atributos</h3>
+                        <p>Define columnas, tipos de datos y restricciones básicas.</p>
+                        <div class="code-block">
+                            <pre><code>CREATE TABLE Usuarios (
+    UsuarioID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    Email VARCHAR(150) UNIQUE NOT NULL,
+    Edad INT,
+    PrecioUltimaCompra DECIMAL(10,2),
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+GO</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('instalacion')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('dml')">Siguiente Tema: Consultas CRUD ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 04: DML -->
+            <section id="topic-dml" class="topic-content">
+                <h2 class="section-title">Consultas Básicas en SQL (CRUD)</h2>
+                <p class="text-block">
+                    DML (Data Manipulation Language) engloba las operaciones de inserción, consulta general, actualización y eliminación de registros.
+                </p>
+
+                <div class="example-box">
+                    <h3 class="subsection-title">1. Insertar Registros (CREATE)</h3>
+                    <div class="code-block">
+                        <pre><code>INSERT INTO Usuarios (Nombre, Email, Edad, PrecioUltimaCompra)
+VALUES ('Lucas Gómez', 'lucas@example.com', 22, 1500.50),
+       ('María Silva', 'maria@example.com', 30, 3200.00),
+       ('Carlos Pérez', 'carlos@test.com', 17, 800.00);</code></pre>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3 class="subsection-title">2. Consultar Todos los Datos (READ)</h3>
+                    <div class="code-block">
+                        <pre><code>SELECT * FROM Usuarios;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3 class="subsection-title">3. Actualizar Registros (UPDATE)</h3>
+                    <div class="code-block">
+                        <pre><code>UPDATE Usuarios
+SET Nombre = 'Lucas Ariel Gómez', Edad = 23
+WHERE UsuarioID = 1;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h3 class="subsection-title">4. Eliminar Registros (DELETE)</h3>
+                    <div class="code-block">
+                        <pre><code>DELETE FROM Usuarios
+WHERE UsuarioID = 3;</code></pre>
+                    </div>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('ddl')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('filtrado')">Siguiente Tema: Filtrado ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 05: FILTRADO DE RESULTADOS -->
+            <section id="topic-filtrado" class="topic-content">
+                <h2 class="section-title">Filtrado de Resultados con Condicionales</h2>
+                <p class="text-block">
+                    La cláusula <code>WHERE</code> permite extraer unicamente los registros que cumplan criterios específicos, optimizando las consultas.
+                </p>
+
+                <h3 class="subsection-title">Operadores de Comparación y Lógicos</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Filtros numéricos y lógicos (AND / OR)</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>-- Usuarios mayores de edad con compras superiores a $1000
+SELECT Nombre, Edad, PrecioUltimaCompra 
+FROM Usuarios 
+WHERE Edad >= 18 AND PrecioUltimaCompra > 1000;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Búsqueda de Patrones con LIKE y Comodines</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Filtros de texto con LIKE</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>-- Buscar correos pertenecientes al dominio 'example.com'
+SELECT Nombre, Email 
+FROM Usuarios 
+WHERE Email LIKE '%@example.com';</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Filtrado con RANGOS (BETWEEN) y LISTAS (IN)</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Filtros con BETWEEN e IN</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>-- Usuarios entre 20 y 40 años
+SELECT * FROM Usuarios WHERE Edad BETWEEN 20 AND 40;
+
+-- Filtrar usuarios por una lista específica de IDs
+SELECT * FROM Usuarios WHERE UsuarioID IN (1, 5, 8, 12);</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('dml')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('ordenamiento')">Siguiente Tema: Ordenamiento ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 06: ORDENAMIENTO DE RESULTADOS -->
+            <section id="topic-ordenamiento" class="topic-content">
+                <h2 class="section-title">Ordenamiento de Resultados (ORDER BY)</h2>
+                <p class="text-block">
+                    La cláusula <code>ORDER BY</code> organiza el conjunto de datos retornado de forma ascendente (ASC) o descendente (DESC). Se combina con <code>TOP</code> u <code>OFFSET/FETCH</code> para paginación.
+                </p>
+
+                <h3 class="subsection-title">1. Ordenar por una o varias columnas</h3>
+                <div class="code-block">
+                    <pre><code>-- Ordenar de mayor a menor según la edad
+SELECT Nombre, Edad, Email 
+FROM Usuarios 
+ORDER BY Edad DESC;
+
+-- Ordenar por Edad (Ascendente) y luego por Nombre (Ascendente)
+SELECT Nombre, Edad 
+FROM Usuarios 
+ORDER BY Edad ASC, Nombre ASC;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">2. Limitar Resultados con TOP</h3>
+                <div class="code-block">
+                    <pre><code>-- Obtener únicamente los 5 usuarios que más dinero gastaron
+SELECT TOP 5 Nombre, PrecioUltimaCompra 
+FROM Usuarios 
+ORDER BY PrecioUltimaCompra DESC;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">3. Paginación con OFFSET y FETCH</h3>
+                <div class="code-block">
+                    <pre><code>-- Saltar los primeros 10 registros y obtener los siguientes 5
+SELECT UsuarioID, Nombre 
+FROM Usuarios 
+ORDER BY UsuarioID ASC 
+OFFSET 10 ROWS FETCH NEXT 5 ROWS ONLY;</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('filtrado')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('agregacion')">Siguiente Tema: Agregación ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 07: FUNCIONES DE AGREGACIÓN -->
+            <section id="topic-agregacion" class="topic-content">
+                <h2 class="section-title">Funciones de Agregación</h2>
+                <p class="text-block">
+                    Las funciones de agregación efectúan cálculos matemáticos o estadísticos sobre un conjunto de filas y devuelven un único valor resumido.
+                </p>
+
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>📊 COUNT()</h3>
+                        <p>Cuenta el total de filas o registros que coinciden con la consulta.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>💵 SUM()</h3>
+                        <p>Suma todos los valores numéricos de una columna determinada.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📈 AVG()</h3>
+                        <p>Calcula el promedio aritmético de los valores numéricos de la columna.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📉 MIN() / MAX()</h3>
+                        <p>Encuentra el valor mínimo o máximo dentro de una columna.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Ejemplo Unificado en SQL</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Cálculos Estadísticos</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>SELECT 
+    COUNT(*) AS TotalUsuarios,
+    SUM(PrecioUltimaCompra) AS TotalVentas,
+    AVG(PrecioUltimaCompra) AS PromedioVenta,
+    MIN(Edad) AS EdadMinima,
+    MAX(Edad) AS EdadMaxima
+FROM Usuarios;</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('ordenamiento')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('agrupamiento')">Siguiente Tema: Agrupamiento ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 08: AGRUPAMIENTO DE RESULTADOS -->
+            <section id="topic-agrupamiento" class="topic-content">
+                <h2 class="section-title">Agrupamiento de Resultados (GROUP BY & HAVING)</h2>
+                <p class="text-block">
+                    <code>GROUP BY</code> colapsa filas con valores idénticos en filas de resumen. Para filtrar los grupos ya resumidos se utiliza <code>HAVING</code> (en lugar de <code>WHERE</code>).
+                </p>
+
+                <h3 class="subsection-title">1. Agrupar Registros con GROUP BY</h3>
+                <div class="code-block">
+                    <pre><code>-- Agrupar usuarios por edad y contar cuántos hay de cada edad
+SELECT Edad, COUNT(*) AS CantidadUsuarios
+FROM Usuarios
+GROUP BY Edad;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">2. Filtrar Grupos con HAVING</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Diferencia entre WHERE y HAVING</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>-- Obtener edades cuyo promedio de compra sea mayor a $2000
+SELECT Edad, AVG(PrecioUltimaCompra) AS PromedioGasto
+FROM Usuarios
+WHERE Edad >= 18 -- Filtra filas antes de agrupar
+GROUP BY Edad
+HAVING AVG(PrecioUltimaCompra) > 2000; -- Filtra los grupos formados</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('agregacion')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('relaciones')">Siguiente Tema: Relaciones ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 09: RELACIONES Y CLAVES -->
+            <section id="topic-relaciones" class="topic-content">
+                <h2 class="section-title">Claves Primarias y Foráneas (Relaciones)</h2>
+                <p class="text-block">
+                    Las relaciones integran la integridad referencial en las bases de datos relacionales, conectando registros de distintas tablas.
+                </p>
+
+                <div class="card-grid">
+                    <div class="info-card">
+                        <div class="card-icon">🔑</div>
+                        <h3>Clave Primaria (Primary Key)</h3>
+                        <p>Campo único que identifica cada fila de una tabla sin duplicados ni valores nulos.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-icon">🔗</div>
+                        <h3>Clave Foránea (Foreign Key)</h3>
+                        <p>Columna que apunta a la Clave Primaria de otra tabla, asegurando la coherencia de los datos.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Ejemplo: Vincular la Tabla Publicaciones con Usuarios</h3>
+                <div class="code-block">
+                    <pre><code>CREATE TABLE Publicaciones (
+    PublicacionID INT PRIMARY KEY IDENTITY(1,1),
+    Titulo VARCHAR(200) NOT NULL,
+    Contenido TEXT,
+    UsuarioID INT,
+    CONSTRAINT FK_Publicaciones_Usuarios 
+        FOREIGN KEY (UsuarioID) REFERENCES Usuarios(UsuarioID)
+);</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('agrupamiento')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('joins')">Siguiente Tema: JOINs ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 10: JOINs -->
+            <section id="topic-joins" class="topic-content">
+                <h2 class="section-title">Consultas entre Tablas con JOINs</h2>
+                <p class="text-block">
+                    Los <code>JOINs</code> permiten combinar columnas de dos o más tablas en una sola consulta utilizando la relación existente entre sus claves.
+                </p>
+
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h3>INNER JOIN</h3>
+                        <p>Retorna solo los registros que coinciden en ambas tablas.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>LEFT JOIN</h3>
+                        <p>Retorna todas las filas de la tabla izquierda y las coincidencias de la derecha.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>RIGHT JOIN</h3>
+                        <p>Retorna todas las filas de la tabla derecha y las coincidencias de la izquierda.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Ejemplos Prácticos de JOIN</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Consulta multitabla</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>-- INNER JOIN: Obtener publicaciones junto al nombre de su autor
+SELECT Publicaciones.Titulo, Publicaciones.Contenido, Usuarios.Nombre
+FROM Publicaciones
+INNER JOIN Usuarios ON Publicaciones.UsuarioID = Usuarios.UsuarioID;
+
+-- LEFT JOIN: Mostrar TODOS los usuarios, tengan o no publicaciones
+SELECT Usuarios.Nombre, Publicaciones.Titulo
+FROM Usuarios
+LEFT JOIN Publicaciones ON Usuarios.UsuarioID = Publicaciones.UsuarioID;</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('relaciones')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('subconsultas')">Siguiente Tema: Subconsultas ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 11: SUBCONSULTAS -->
+            <section id="topic-subconsultas" class="topic-content">
+                <h2 class="section-title">Subconsultas (Subqueries)</h2>
+                <p class="text-block">
+                    Una subconsulta es una consulta `SELECT` anidada dentro de otra instrucción SQL (`SELECT`, `INSERT`, `UPDATE` o `DELETE`).
+                </p>
+
+                <h3 class="subsection-title">1. Subconsulta Escalar en la Cláusula WHERE</h3>
+                <div class="code-block">
+                    <pre><code>-- Usuarios cuyo gasto supera el promedio general de todas las compras
+SELECT Nombre, PrecioUltimaCompra
+FROM Usuarios
+WHERE PrecioUltimaCompra > (
+    SELECT AVG(PrecioUltimaCompra) FROM Usuarios
+);</code></pre>
+                </div>
+
+                <h3 class="subsection-title">2. Subconsulta con el Operador IN</h3>
+                <div class="code-block">
+                    <pre><code>-- Obtener datos de usuarios que hayan creado al menos una publicación
+SELECT Nombre, Email
+FROM Usuarios
+WHERE UsuarioID IN (
+    SELECT DISTINCT UsuarioID FROM Publicaciones
+);</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('joins')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('avanzadas')">Siguiente Tema: Consultas Avanzadas ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 12: CONSULTAS AVANZADAS -->
+            <section id="topic-avanzadas" class="topic-content">
+                <h2 class="section-title">Consultas Avanzadas: CTEs, Vistas y Operadores de Conjunto</h2>
+                <p class="text-block">
+                    Herramientas avanzadas para estructurar código modular, simplificar consultas repetitivas y unificar conjuntos de datos.
+                </p>
+
+                <h3 class="subsection-title">1. Expresiones de Tabla Comunes (CTE - Common Table Expressions)</h3>
+                <p class="text-block">Permiten crear un conjunto de resultados temporal accesible dentro de una instrucción SQL posterior mediante la palabra clave <code>WITH</code>.</p>
+                <div class="code-block">
+                    <pre><code>WITH UsuariosVIP AS (
+    SELECT UsuarioID, Nombre, PrecioUltimaCompra
+    FROM Usuarios
+    WHERE PrecioUltimaCompra >= 3000
+)
+SELECT Nombre, PrecioUltimaCompra 
+FROM UsuariosVIP 
+ORDER BY PrecioUltimaCompra DESC;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">2. Vistas Reutilizables (CREATE VIEW)</h3>
+                <p class="text-block">Una vista guarda la estructura de una consulta en la base de datos para ejecutarla como si fuera una tabla virtual.</p>
+                <div class="code-block">
+                    <pre><code>CREATE VIEW vw_ResumenUsuarios AS
+SELECT U.Nombre, U.Email, COUNT(P.PublicacionID) AS TotalPublicaciones
+FROM Usuarios U
+LEFT JOIN Publicaciones P ON U.UsuarioID = P.UsuarioID
+GROUP BY U.Nombre, U.Email;
+GO
+
+-- Consultar la vista creada
+SELECT * FROM vw_ResumenUsuarios WHERE TotalPublicaciones > 0;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">3. Unificación de Consultas con UNION</h3>
+                <div class="code-block">
+                    <pre><code>-- Unir dos consultas eliminando duplicados
+SELECT Email FROM Usuarios
+UNION
+SELECT Email FROM ClientesExternos;</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('subconsultas')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('node')">Siguiente Tema: Conexión Node.js ➔</button>
+                </div>
+            </section>
+
+            <!-- TEMA 13: NODE.JS -->
+            <section id="topic-node" class="topic-content">
+                <h2 class="section-title">Integración con Node.js y Express</h2>
+                <p class="text-block">
+                    Conexión de tu servidor Backend Node.js con Microsoft SQL Server mediante la librería oficial <code>mssql</code>.
+                </p>
+
+                <h3 class="subsection-title">1. Instalación de Dependencias</h3>
+                <div class="code-block">
+                    <pre><code>npm install mssql dotenv</code></pre>
+                </div>
+
+                <h3 class="subsection-title">2. Código de Conexión en JavaScript</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>db.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                    </div>
+                    <pre><code>const sql = require('mssql');
+
+const config = {
+    user: 'sa',
+    password: 'TuPasswordSeguro123',
+    server: 'localhost',
+    database: 'SistemaUsuarios',
+    options: {
+        encrypt: false,
+        trustServerCertificate: true
+    }
+};
+
+async function conectarBD() {
+    try {
+        await sql.connect(config);
+        console.log("✅ Conexión exitosa con Microsoft SQL Server");
+    } catch (error) {
+        console.error("❌ Error de conexión:", error);
+    }
+}
+
+module.exports = { sql, conectarBD };</code></pre>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn-secondary" onclick="selectTopic('avanzadas')">⬅ Anterior</button>
+                    <button class="btn-primary" onclick="selectTopic('intro')">🔄 Volver al Inicio</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- SCRIPT OFICIAL TENOR PARA GIFS -->
+    <script async src="https://tenor.com/embed.js"></script>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 Guía de Aprendizaje SQL Server. Diseñado con interfaz accesible para principiantes.</p>
+    </footer>
+
+</body>
+</html>
