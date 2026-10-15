@@ -1,0 +1,285 @@
+/* ============================================================
+   Estilos generales del sistema de asistencias
+   Orden: variables, base, estructura, componentes, utilidades
+   ============================================================ */
+
+:root {
+    --azul: #1f4e8c;
+    --azul-oscuro: #163a69;
+    --azul-claro: #e8f0fb;
+    --fondo: #f4f6fa;
+    --blanco: #ffffff;
+    --texto: #1d2733;
+    --texto-suave: #5b6b7c;
+    --borde: #d8dee8;
+
+    --verde: #2e7d32;   --verde-fondo: #e3f3e4;
+    --rojo: #c62828;    --rojo-fondo: #fbe4e4;
+    --naranja: #b26a00; --naranja-fondo: #fdf0d9;
+    --celeste: #01579b; --celeste-fondo: #e1f1fc;
+    --gris: #546e7a;    --gris-fondo: #e9eef1;
+
+    --radio: 10px;
+    --sombra: 0 1px 3px rgba(20, 40, 70, .10), 0 4px 12px rgba(20, 40, 70, .06);
+}
+
+/* --- Base ------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 16px; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--texto);
+    background: var(--fondo);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 { font-size: 1.6rem; margin: 0 0 .75rem; }
+h2 { font-size: 1.25rem; margin: 0 0 .75rem; }
+h3 { font-size: 1.05rem; margin: 0 0 .5rem; }
+p  { margin: 0 0 1rem; }
+a  { color: var(--azul); }
+small { color: var(--texto-suave); }
+
+/* --- Barra superior y menú ------------------------------- */
+.topbar {
+    background: var(--azul);
+    color: #fff;
+    box-shadow: var(--sombra);
+}
+
+.topbar-interior {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: .6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.marca {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.marca-icono {
+    display: inline-grid;
+    place-items: center;
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--azul);
+    font-size: .9rem;
+    margin-right: .25rem;
+}
+
+.menu { display: flex; gap: .25rem; flex-wrap: wrap; flex: 1; }
+.menu a {
+    color: #dce8f8;
+    text-decoration: none;
+    padding: .4rem .75rem;
+    border-radius: 6px;
+    font-size: .95rem;
+}
+.menu a:hover { background: rgba(255,255,255,.12); color: #fff; }
+.menu a.activo { background: var(--azul-oscuro); color: #fff; font-weight: 600; }
+
+.usuario { display: flex; align-items: center; gap: .75rem; margin-left: auto; font-size: .9rem; }
+.usuario-nombre { display: flex; flex-direction: column; line-height: 1.2; text-align: right; }
+.usuario-nombre small { color: #b9cdea; }
+.link-suave { color: #dce8f8; font-size: .85rem; }
+
+.form-inline { display: inline; margin: 0; }
+
+/* menú hamburguesa en pantallas chicas (sin JavaScript) */
+.menu-toggle { display: none; }
+.menu-boton { display: none; cursor: pointer; font-size: 1.5rem; margin-left: auto; }
+
+@media (max-width: 860px) {
+    .menu-boton { display: block; }
+    .menu, .usuario { display: none; width: 100%; }
+    .menu-toggle:checked ~ .menu { display: flex; flex-direction: column; }
+    .menu-toggle:checked ~ .usuario { display: flex; justify-content: space-between; margin-left: 0; }
+}
+
+/* --- Estructura ------------------------------------------ */
+.contenedor {
+    flex: 1;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 2rem;
+}
+
+.pie {
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: .85rem;
+    padding: 1rem;
+}
+
+.encabezado-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.encabezado-pagina p { margin: 0; color: var(--texto-suave); }
+
+.grilla { display: grid; gap: 1rem; }
+.grilla-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grilla-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.grilla-4 { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+
+/* --- Pantallas de ingreso (login, registro) -------------- */
+.layout-auth { justify-content: center; }
+.auth-caja {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+.auth-marca {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: 1rem;
+}
+
+/* --- Tarjetas -------------------------------------------- */
+.tarjeta {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+.tarjeta-centrada { max-width: 480px; margin: 2rem auto; text-align: center; }
+
+/* Número grande de los dashboards */
+.stat {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-left: 5px solid var(--azul);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1rem 1.25rem;
+}
+.stat-numero { font-size: 2rem; font-weight: 700; line-height: 1.1; }
+.stat-texto { color: var(--texto-suave); font-size: .9rem; }
+.stat-verde { border-left-color: var(--verde); }
+.stat-rojo { border-left-color: var(--rojo); }
+.stat-naranja { border-left-color: var(--naranja); }
+
+/* --- Formularios ----------------------------------------- */
+.campo { margin-bottom: 1rem; }
+.campo label { display: block; font-weight: 600; margin-bottom: .25rem; }
+.campo .ayuda { font-size: .85rem; color: var(--texto-suave); margin-top: .25rem; }
+
+input[type=text], input[type=email], input[type=password],
+input[type=date], input[type=time], input[type=number],
+select, textarea {
+    width: 100%;
+    padding: .55rem .7rem;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+    font: inherit;
+    color: inherit;
+    background: #fff;
+}
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--azul);
+    outline-offset: 1px;
+    border-color: var(--azul);
+}
+textarea { min-height: 90px; resize: vertical; }
+
+.campo-error input, .campo-error select { border-color: var(--rojo); }
+.mensaje-error { color: var(--rojo); font-size: .85rem; margin-top: .25rem; }
+
+/* --- Botones --------------------------------------------- */
+.btn {
+    display: inline-block;
+    padding: .6rem 1.1rem;
+    border: 1px solid var(--azul);
+    border-radius: 7px;
+    background: var(--azul);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn:hover { background: var(--azul-oscuro); }
+.btn-borde { background: transparent; color: inherit; border-color: currentColor; }
+.topbar .btn-borde { color: #fff; }
+.topbar .btn-borde:hover { background: rgba(255,255,255,.15); }
+.btn-borde:hover { background: var(--azul-claro); }
+.btn-peligro { background: var(--rojo); border-color: var(--rojo); }
+.btn-peligro:hover { background: #a31f1f; }
+.btn-chico { padding: .3rem .7rem; font-size: .85rem; }
+.btn-ancho { width: 100%; }
+
+/* --- Alertas --------------------------------------------- */
+.alerta {
+    padding: .75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid;
+    margin-bottom: 1rem;
+}
+.alerta-exito { background: var(--verde-fondo);   border-color: var(--verde);   color: #1b5e20; }
+.alerta-error { background: var(--rojo-fondo);    border-color: var(--rojo);    color: #8e1b1b; }
+.alerta-aviso { background: var(--naranja-fondo); border-color: var(--naranja); color: #7a4a00; }
+.alerta-info  { background: var(--celeste-fondo); border-color: var(--celeste); color: #01406f; }
+
+/* --- Tablas ---------------------------------------------- */
+.tabla-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--blanco); }
+th, td { padding: .6rem .75rem; text-align: left; border-bottom: 1px solid var(--borde); }
+th { background: var(--azul-claro); font-size: .85rem; text-transform: uppercase; letter-spacing: .03em; color: var(--azul-oscuro); }
+tbody tr:hover { background: #f8fafd; }
+td.centro, th.centro { text-align: center; }
+
+/* --- Etiquetas de estado --------------------------------- */
+.badge {
+    display: inline-block;
+    padding: .15rem .6rem;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 600;
+}
+.badge-presente    { background: var(--verde-fondo);   color: var(--verde); }
+.badge-ausente     { background: var(--rojo-fondo);    color: var(--rojo); }
+.badge-tarde       { background: var(--naranja-fondo); color: var(--naranja); }
+.badge-justificada { background: var(--celeste-fondo); color: var(--celeste); }
+.badge-retirado    { background: var(--gris-fondo);    color: var(--gris); }
+.badge-libre       { background: var(--gris-fondo);    color: var(--gris); }
+
+/* --- Utilidades ------------------------------------------ */
+.texto-suave { color: var(--texto-suave); }
+.texto-centro { text-align: center; }
+.mt { margin-top: 1rem; }
+.mb0 { margin-bottom: 0; }
+.fila { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+
+@media print {
+    .topbar, .pie, .btn { display: none; }
+    body { background: #fff; }
+}
+
+/* --- Formularios en dos columnas y pie de las pantallas de ingreso --- */
+.campos-doble { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+@media (max-width: 480px) { .campos-doble { grid-template-columns: 1fr; } }
+.auth-pie { text-align: center; margin-top: 1rem; font-size: .95rem; }

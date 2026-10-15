@@ -1,0 +1,12 @@
+[2026-10-15 17:38:49] Para: laura.gomez@escuela.local
+Asunto: Recuperar tu contraseña - Asistencias Escolares
+Hola Milena,
+
+Recibimos un pedido para cambiar tu contraseña. Entrá a este link:
+
+http://localhost/asistencias/public/reset_password.php?token=409b65c5b9af1ce3533b3e14a81a3c738786bc863440a3cf4225efa1e690bff4
+
+El link sirve una sola vez y vence en 60 minutos.
+Si no lo pediste vos, ignorá este mensaje: tu contraseña no cambia.
+
+---
